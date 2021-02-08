@@ -9,15 +9,16 @@ const initialState={
     description:""
 
 }
-const AddForm =({isLoading, error, props}) =>{
+const AddForm =({isLoading, error,}) =>{
    
-        const [data,setData] = useState(initialState);
+    const [data,setData] = useState(initialState);
 
     const handleSubmit = e =>{
     e.preventDefault();
     setData(initialState)
     addSmurf(data)
     console.log("submitted",data)
+
     // props.fetchSmurf(data)
 }
     const handleChange = e =>{
@@ -49,7 +50,9 @@ const AddForm =({isLoading, error, props}) =>{
                 </div>
 
                 {error !== '' ? <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: {error} </div> : ''}
-                <button  onClick={() => addSmurf(data)}>Submit Smurf</button>
+                <button onClick ={() =>{
+                addSmurf(data)
+            }}  >Submit Smurf</button>
             </form>
         </section>);
     }

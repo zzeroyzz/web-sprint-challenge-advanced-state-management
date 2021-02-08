@@ -19,7 +19,7 @@ export const DATA_LOAD_ERROR  = "DATA_LOAD_ERROR"
 export const ADD_SMURF="ADD_SMURF"
 export const ADD_SMURF_SUCCESS  = "ADD_SMURF_SUCCESS"
 export const ADD_SMURF_FAIL  = "ADD_SMURF_FAIL"
-
+export const TEXT_ERROR ="TEXT_ERROR"
 
 export const fetchSmurf = (location) => (dispatch) =>{
     dispatch({type:LOADING_SMURF_DATA});
@@ -40,7 +40,7 @@ export const fetchSmurf = (location) => (dispatch) =>{
     },1500)
 }
 
-export const addSmurf = (newSmurf) => (dispatch) =>{
+export const addSmurf = (newSmurf,refresh, setRefresh) => (dispatch) =>{
     dispatch({type:ADD_SMURF})
     axios
     .post('http://localhost:3333/smurfs', newSmurf)
@@ -51,5 +51,10 @@ export const addSmurf = (newSmurf) => (dispatch) =>{
     .catch(err =>{
         dispatch({type:ADD_SMURF_FAIL, payload:err.message})
         console.log(`smurf error`,err.message)
+        setRefresh(!refresh)
+
     })
+}
+export const textError = (error) => dispatch =>{
+    dispatch({typee:TEXT_ERROR, payload:error})
 }

@@ -9,7 +9,7 @@ export class SmurfDisplay extends React.Component {
     render() {
        
         return(<div className ="smurf-list">
-            {this.props.newSmurfs.length > 0 && this.props.newSmurfs.map(smurfs =>
+            {this.props.isPosting ? "loading smurfs":this.props.newSmurfs.length > 0 && this.props.newSmurfs.map(smurfs =>
                 (<Smurf key={smurfs.id} smurfs={smurfs}/>)
             )}
         </div>)
@@ -17,7 +17,9 @@ export class SmurfDisplay extends React.Component {
 }
 const mapStateToProps = (state) =>{
     return{
-        newSmurfs:state.newSmurfs
+        newSmurfs:state.newSmurfs,
+        isPosting:state.isPosting,
+        error:state.error
     }
 }
 export default connect(mapStateToProps,{fetchSmurf})(SmurfDisplay);
