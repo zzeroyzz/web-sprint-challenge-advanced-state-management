@@ -38,6 +38,6 @@
 
 <img width="800" src="https://tk-assets.lambdaschool.com/2afe5b53-cc7d-4dbe-adcd-6435d59ac9ea_ScreenShot2020-10-29at3.38.12PM.png" />
 
-11. Click "Add webhook". Now you are all setup.
+11. Click "Add webhook". Now you are all setup
 
 12. You can test the setup by going to the 4th step in CodeGrade. Make your first commit to the main branch and push that commit. Then go back to CodeGrade and click the "Check for new git submission". It may take about 10 secoonds to find a new submission. After that point you should see that there is a new submission, and you're ready to work.

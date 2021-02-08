@@ -9,22 +9,28 @@ const initialState={
     description:""
 
 }
-const AddForm =(props) =>{
+const AddForm =({isLoading, error, props}) =>{
    
         const [data,setData] = useState(initialState);
 
     const handleSubmit = e =>{
     e.preventDefault();
     setData(initialState)
-    props.addSmurf(data)
-    console.log("submitted")
+    addSmurf(data)
+    console.log("submitted",data)
     // props.fetchSmurf(data)
 }
     const handleChange = e =>{
-        console.log("something changed",e)
+        console.log("something changed")
         setData({...data,
         [e.target.name]: e.target.value})
     }
+    if(error){
+        return <h2>We got an error: {error}</h2>
+      }
+      if(isLoading){
+        return <h2>Fetching Smurfs</h2>
+      }
         return(<section>
             <h2>Add Smurf</h2>
             <form onSubmit={handleSubmit}>
@@ -42,8 +48,8 @@ const AddForm =(props) =>{
                     <input onChange={handleChange} name="description" id="description" />
                 </div>
 
-                {props.error !== '' ? <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: {props.error} </div> : ''}
-                <button>Submit Smurf</button>
+                {error !== '' ? <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: {error} </div> : ''}
+                <button  onClick={() => addSmurf(data)}>Submit Smurf</button>
             </form>
         </section>);
     }
@@ -51,7 +57,8 @@ const AddForm =(props) =>{
 const mapStateToProps = (state) => {
     return {
         newSmurf:state.newSmurf,
-        error:state.error
+        error:state.error,
+        isLoading:state.isLoading
     }
 }
 export default connect(mapStateToProps, {addSmurf})(AddForm);

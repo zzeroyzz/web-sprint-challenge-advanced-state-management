@@ -10,7 +10,8 @@ import {
 export const initialState = {
     isPosting:false,
     isLoading:false,
-    newSmurfs:[]
+    newSmurfs:[],
+    error:'',
 }
 
 export const reducer = (state = initialState, action)=>{
