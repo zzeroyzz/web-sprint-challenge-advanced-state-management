@@ -1,7 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 
+const [data,setData] = useState();
+    
+const handleSubmit = e =>{
+    e.preventDefault();
+
+}
 class AddForm extends React.Component {
-
+   
     render() {
         return(<section>
             <h2>Add Smurf</h2>

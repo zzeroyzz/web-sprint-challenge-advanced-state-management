@@ -1,11 +1,46 @@
+import {
+    LOADING_SMURF_DATA,
+    DATA_LOAD_SUCCESS,
+    DATA_LOAD_ERROR,
+    ADD_SMURF
+} from "../actions/index"
 
 export const initialState = {
+    isLoading:false,
+    newSmurfs:[]
 }
 
-const reducer = ()=>{
+export const reducer = (state = initialState, action)=>{
+    switch(action.type){
+        case LOADING_SMURF_DATA:
+            return{
+                ...state,
+                isLoading:true
+            }
+            case DATA_LOAD_SUCCESS:{
+                return{
+                    isLoading:false,
+                    newSmurfs:action.payload
+                }
+            }
+            case DATA_LOAD_ERROR:{
+                return{
+                    ...state,
+                    isLoading:true,
+                    error:action.payload
+                }
+            }
+            case ADD_SMURF:
+                return{
+                    ...state,
+                    newSmurfs:action.payload
+                }
+                default:
+                    return state;
+
+    }
 }
 
-export default reducer;
 
 //Task List:
 //1. Add in the initialState needed to hold: 
