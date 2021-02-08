@@ -16,8 +16,9 @@ import axios from 'axios';
 export const LOADING_SMURF_DATA  = "LOADING_SMURF_DATA"
 export const DATA_LOAD_SUCCESS  = "DATA_LOAD_SUCCESS"
 export const DATA_LOAD_ERROR  = "DATA_LOAD_ERROR"
-export const ADD_SMURF  = "ADD_SMURF"
-
+export const ADD_SMURF="ADD_SMURF"
+export const ADD_SMURF_SUCCESS  = "ADD_SMURF_SUCCESS"
+export const ADD_SMURF_FAIL  = "ADD_SMURF_FAIL"
 
 
 export const fetchSmurf = (location) => (dispatch) =>{
@@ -25,7 +26,7 @@ export const fetchSmurf = (location) => (dispatch) =>{
     console.log(`making axios call`)
     setTimeout(() =>{
     axios
-    .get(`http:/localhost:3333/smurfs`,location)
+    .get('http://localhost:3333/smurfs',location)
     .then((res) =>{
         console.log(`KH: actions.js fetchSmurf axios:good`)
         dispatch({ type: DATA_LOAD_SUCCESS,
@@ -39,14 +40,16 @@ export const fetchSmurf = (location) => (dispatch) =>{
     },1500)
 }
 
-export const addSmurf = (smurf) => (dispatch) =>{
+export const addSmurf = (newSmurf) => (dispatch) =>{
+    dispatch({type:ADD_SMURF})
     axios
-    .post(`http:/localhost:3333/smurfs`,smurf)
+    .post('http://localhost:3333/smurfs', newSmurf)
     .then((res) =>{
-        dispatch({type:ADD_SMURF, payload:{name:res.data.name,position:res.data.position, nickname:res.data.nickname, description:res.data.description}})
+        dispatch({type:ADD_SMURF_SUCCESS, payload:{name:res.data.name,position:res.data.position, nickname:res.data.nickname, description:res.data.description}})
         console.log(`response from server`,res)
     })
     .catch(err =>{
-        console.log(`smurf error`,err)
+        dispatch({type:ADD_SMURF_FAIL, payload:err.message})
+        console.log(`smurf error`,err.message)
     })
 }

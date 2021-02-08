@@ -2,10 +2,13 @@ import {
     LOADING_SMURF_DATA,
     DATA_LOAD_SUCCESS,
     DATA_LOAD_ERROR,
-    ADD_SMURF
+    ADD_SMURF,
+    ADD_SMURF_SUCCESS,
+    ADD_SMURF_FAIL
 } from "../actions/index"
 
 export const initialState = {
+    isPosting:false,
     isLoading:false,
     newSmurfs:[]
 }
@@ -33,7 +36,18 @@ export const reducer = (state = initialState, action)=>{
             case ADD_SMURF:
                 return{
                     ...state,
+                    isPosting:true,
+                }
+            case ADD_SMURF_SUCCESS:
+                return{
+                    ...state,
                     newSmurfs:action.payload
+                }
+            case ADD_SMURF_FAIL:
+                return{
+                    ...state,
+                    isPosting:false,
+                    error:action.payload
                 }
                 default:
                     return state;
